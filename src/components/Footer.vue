@@ -1,6 +1,8 @@
 <template>
-    <div>
-        Footer
+    <div class="footer flex">
+        <div class="footer__content flex container">
+            FOoter
+        </div>
     </div>
 </template>
 
@@ -10,6 +12,20 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.footer {
+    position: fixed;
+    bottom: 0;
 
+    width: 100%;
+
+    color: #fff;
+
+    height: 80px;
+    background: $def-background;
+
+    &__content {
+        justify-content: flex-start;
+    }
+}
 </style>
