@@ -18,11 +18,10 @@ class Application {
 
         app.use(cors())
 
-
-        app.get('/task', this.oneSearchHandler.bind(this));
         app.get('/tasks', this.allSearchHandler.bind(this));
         app.post('/add', jsonParser, this.createTaskHandler.bind(this));
         app.post('/edit', jsonParser, this.editTaskHandler.bind(this));
+        app.post('/delete', jsonParser, this.deleteTaskHandler.bind(this));
     }
 
     createTaskHandler (req, res) {
@@ -61,6 +60,17 @@ class Application {
         }
     }
 
+    deleteTaskHandler (req, res) {
+
+            this.manager.deleteTask(req.body.id);
+
+            let response = {
+                name: ' задача удалена '
+            }
+
+            res.json(response);
+    }
+
     allSearchHandler (req, res) {
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
@@ -69,20 +79,6 @@ class Application {
 
         let response = {
             tasks
-        };
-
-
-        res.json(response);
-    }
-
-    oneSearchHandler (req, res) {
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
-
-        let task = this.manager.getById(Number(req.query.id));
-
-        let response = {
-            task
         };
 
 

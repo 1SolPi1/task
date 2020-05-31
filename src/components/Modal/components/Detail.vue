@@ -2,7 +2,7 @@
     <div class="addTask flex">
         <div class="addTask__detail-header flex">
             <span class="addTask__title">Редактировать задачу</span>
-            <button class="addTask__delete" @click="deleteTask">Удалить</button>
+            <button class="addTask__delete" @click="deletesTask">Удалить</button>
         </div>
         <input type="text" class="input" placeholder="Имя" v-model="name">
         <input type="text" class="input" placeholder="Описание" v-model="description">
@@ -61,13 +61,15 @@
         },
         
         methods: {
-            ...mapActions(['editTask']),
+            ...mapActions(['editTask', 'deleteTask']),
             ...mapMutations('modal', {
                 close: 'CLOSE_MODAL',
             }),
 
-            deleteTask(){
-                
+            async deletesTask(){
+                await this.deleteTask({id: this.payload.id})
+
+                this.close();
             },
 
             async saveTask(){

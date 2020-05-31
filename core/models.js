@@ -29,12 +29,16 @@ class TaskManager {
        return task;
     }
 
-    getById (id) {
-        return this.tasks[id];
-    }
-
     getAll () {
         return this.tasks;
+    }
+
+    deleteTask (id) {
+       for (let key in this.tasks) {
+           if (this.tasks[key].id === id) {
+               delete this.tasks[key]
+           }
+       }
     }
 }
 

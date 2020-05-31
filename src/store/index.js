@@ -42,5 +42,12 @@ export default new Vuex.Store({
         dispatch('getAllTasks');
       })
     },
+
+    deleteTask: ({ dispatch }, id) => {
+
+      CRUD.deleteTask(JSON.stringify(id)).then(()=>{
+        dispatch('getAllTasks');
+      })
+    },
   },
 })
