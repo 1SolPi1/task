@@ -4,6 +4,50 @@ const bodyParser = require('body-parser');
 
 const models = require('./models');
 
+const apps = require('express')();
+const server = require('http').Server(apps);
+const io = require('socket.io')(server);
+
+server.listen(80);
+
+const manager = new models.TaskManager();
+
+io.on('connection', (socket) => {
+
+    socket.on('getAll', (data) => {
+        let tasks = manager.getAll();
+
+        socket.emit('task', tasks);
+    });
+
+    socket.on('create', (data) => {
+
+        manager.createTask(data);
+
+        let tasks = manager.getAll();
+
+        socket.emit('task', tasks);
+    });
+
+    socket.on('edit', (data) => {
+
+        manager.editTask(data);
+
+        let tasks = manager.getAll();
+
+        socket.emit('task', tasks);
+    });
+
+    socket.on('delete', (data) => {
+
+        manager.deleteTask(data.id);
+
+        let tasks = manager.getAll();
+
+        socket.emit('task', tasks);
+    });
+
+});
 
 class Application {
     constructor () {

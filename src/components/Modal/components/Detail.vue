@@ -30,7 +30,7 @@
 </template>
 
 <script>
-    import { mapActions, mapMutations } from 'vuex';
+    import { mapMutations } from 'vuex';
     export default {
         name: "Detail",
 
@@ -61,19 +61,18 @@
         },
         
         methods: {
-            ...mapActions(['editTask', 'deleteTask']),
             ...mapMutations('modal', {
                 close: 'CLOSE_MODAL',
             }),
 
-            async deletesTask(){
-                await this.deleteTask({id: this.payload.id})
+            deletesTask(){
+                this.$socket.emit('delete', {id: this.payload.id})
 
                 this.close();
             },
 
-            async saveTask(){
-                const {name, description, category, publish, personal, editTask, close} = this;
+            saveTask(){
+                const {name, description, category, publish, personal, close} = this;
 
                 const data = {
                     id: this.payload.id,
@@ -84,7 +83,7 @@
                     personal
                 };
 
-                await editTask(data);
+                this.$socket.emit('edit', data)
 
                 close();
 

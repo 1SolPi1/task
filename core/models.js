@@ -34,11 +34,7 @@ class TaskManager {
     }
 
     deleteTask (id) {
-       for (let key in this.tasks) {
-           if (this.tasks[key].id === id) {
-               delete this.tasks[key]
-           }
-       }
+        delete this.tasks[id]
     }
 }
 

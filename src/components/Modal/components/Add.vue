@@ -27,7 +27,7 @@
 </template>
 
 <script>
-    import { mapActions, mapMutations } from 'vuex';
+    import { mapMutations } from 'vuex';
     export default {
         name: "Add",
 
@@ -40,13 +40,12 @@
         }),
 
         methods: {
-            ...mapActions(['addTask']),
             ...mapMutations('modal', {
                 close: 'CLOSE_MODAL',
             }),
 
-           async createTask(){
-                const {name, description, category, publish, personal, addTask, close} = this;
+           createTask(){
+                const {name, description, category, publish, personal, close} = this;
 
                 const data = {
                     name,
@@ -56,7 +55,7 @@
                     personal
                 };
 
-                await addTask(data);
+               this.$socket.emit('create', data)
 
                 close();
 

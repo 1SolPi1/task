@@ -1,7 +1,7 @@
 <template>
     <div class="main flex">
         <div class="main__content container flex">
-            <TaskComponent v-for="task in tasks" :key="task.id" :task="task"/>
+            <TaskComponent v-for="task in list" :key="task.id" :task="task"/>
         </div>
     </div>
 </template>
@@ -9,21 +9,21 @@
 <script>
     import TaskComponent from "./TaskComponent";
 
-    import { mapActions, mapState } from 'vuex';
     export default {
         name: "Main",
         components: {TaskComponent},
 
-        computed: {
-            ...mapState(['tasks'])
-        },
+        data: () => ({
+           list: []
+        }),
 
-        methods: {
-            ...mapActions(["getAllTasks"])
+        created() {
+            this.$socket.emit('getAll', '')
+
+            this.sockets.listener.subscribe('task', (data) => {
+                this.list = data
+            });
         },
-        mounted() {
-            this.getAllTasks()
-        }
     }
 </script>
 
