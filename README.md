@@ -5,6 +5,11 @@
 npm install
 ```
 
+### Start server
+```
+node ./core/index.js
+```
+
 ### Compiles and hot-reloads for development
 ```
 npm run serve
