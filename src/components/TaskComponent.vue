@@ -2,7 +2,7 @@
     <div class="task" @click="openDetailTask">
         <div class="task__header flex">
             <span class="task__slug">#Task-{{ task.id + 1 }}</span>
-            <span class="task__time">{{ task.date }}</span>
+            <span class="task__time">{{ date(task.date) }}</span>
         </div>
 
         <div class="task__main flex">
@@ -18,6 +18,8 @@
 
 <script>
     import { mapActions } from 'vuex';
+
+    import dates from "../scripts/getDate";
 
     export default {
         name: "TaskComponent",
@@ -39,6 +41,10 @@
                     name: 'Detail',
                     payload: this.task
                 })
+            },
+
+            date(time) {
+                return dates(time).date_with_time;
             }
         },
     }
