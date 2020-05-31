@@ -1,7 +1,8 @@
 <template>
     <div class="footer flex">
         <div class="footer__content flex container">
-            FOoter
+            <a href="https://github.com/1SolPi1">Made by Solpi</a>
+            <span>&copy; 2020</span>
         </div>
     </div>
 </template>
@@ -25,7 +26,12 @@
     background: $def-background;
 
     &__content {
-        justify-content: flex-start;
+        justify-content: space-between;
+    }
+
+    a {
+        color: white;
+        font-size: 22px;
     }
 }
 </style>

@@ -14,6 +14,21 @@ class TaskManager {
         return task;
     }
 
+    editTask (data) {
+        const {name, description, category, publish, personal} = data;
+
+        const task = this.tasks[data.id];
+
+        task.name = name;
+        task.description = description;
+        task.category = category;
+        task.publish = publish;
+        task.personal = personal;
+
+
+       return task;
+    }
+
     getById (id) {
         return this.tasks[id];
     }
@@ -33,6 +48,7 @@ class Task {
         this.category = data.category;
         this.publish = data.publish;
         this.personal = data.personal;
+        this.description = data.description;
     }
 
     toJson () {
@@ -42,7 +58,8 @@ class Task {
             date: this.date,
             category: this.category,
             publish: this.publish,
-            personal: this.personal
+            personal: this.personal,
+            description: this.description,
         };
     }
 }

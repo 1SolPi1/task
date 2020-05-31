@@ -22,6 +22,7 @@ class Application {
         app.get('/task', this.oneSearchHandler.bind(this));
         app.get('/tasks', this.allSearchHandler.bind(this));
         app.post('/add', jsonParser, this.createTaskHandler.bind(this));
+        app.post('/edit', jsonParser, this.editTaskHandler.bind(this));
     }
 
     createTaskHandler (req, res) {
@@ -37,6 +38,23 @@ class Application {
             let task = this.manager.createTask(req.body);
             let response = {
                 task: task.toJson()
+            };
+
+            res.json(response);
+        }
+    }
+
+    editTaskHandler (req, res) {
+
+        if (!req.body) {
+            res.status(400).json({});
+        } else {
+
+            console.log(req.body)
+
+            let task = this.manager.editTask(req.body);
+            let response = {
+                task: task
             };
 
             res.json(response);

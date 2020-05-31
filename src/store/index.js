@@ -27,12 +27,20 @@ export default new Vuex.Store({
       commit('setTasks', data.tasks);
     },
 
-    addTask: (_skip, data) => {
+    addTask: ({ dispatch }, data) => {
       console.log(data)
 
       CRUD.addTask(JSON.stringify(data)).then(()=>{
-        console.log('done')
+        dispatch('getAllTasks');
       })
-    }
+    },
+
+    editTask: ({ dispatch }, data) => {
+      console.log(data)
+
+      CRUD.editTask(JSON.stringify(data)).then(()=>{
+        dispatch('getAllTasks');
+      })
+    },
   },
 })

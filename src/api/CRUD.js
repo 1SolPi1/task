@@ -9,5 +9,9 @@ export default {
     },
     addTask(data) {
         return api.post('/add', data);
+    },
+
+    editTask(data) {
+        return api.post('/edit', data);
     }
 };

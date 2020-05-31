@@ -1,7 +1,7 @@
 <template>
     <div class="task" @click="openDetailTask">
         <div class="task__header flex">
-            <span class="task__slug">#Task-{{ task.id }}</span>
+            <span class="task__slug">#Task-{{ task.id + 1 }}</span>
             <span class="task__time">{{ task.date }}</span>
         </div>
 
